@@ -2,7 +2,7 @@ import functools
 import signal
 
 from core import main_loop
-from core.persistence import memory, save_memory
+from core.persistence import get_memory, save_memory
 
 def accept_input():
     user_input = input("tb> ")
@@ -12,7 +12,7 @@ def accept_input():
 def process_input(user_input):
     # very naive processing for now
     if user_input == "memory":
-        print(memory)
+        print(get_memory())
     if user_input == "sleep":
         sleep()
 
@@ -22,4 +22,3 @@ def sleep():
 
 # CTRL-C 
 main_loop.add_signal_handler(getattr(signal, 'SIGINT'), accept_input)
-

@@ -4,6 +4,7 @@
 # Copyright 2017
 from core import main_loop
 import core.conversational
+import core.persistence
 
 # Start the main loop
 try:
