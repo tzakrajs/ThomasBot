@@ -9,11 +9,7 @@ memory = {}
 
 def main():
     global memory
-    try:
-        memory = load_memory_from_disk()
-    except ValueError:
-        # There is no memory file on disk
-        pass
+    memory = load_memory_from_disk()
 
 def get_memory():
     return memory
@@ -24,13 +20,19 @@ def save_memory(type, value):
     memory[type].append(value)
 
 def persist_memory_to_disk():
+    if load_memory_from_disk() == memory:
+        pass
     with open('thomasbot_memory_{0}.json'.format(get_epoch()), 'w') as outfile:
         json.dump(memory, outfile)
 
 def load_memory_from_disk():
-    latest = max(glob.iglob('thomasbot_memory*.json'), key=os.path.getctime)
-    with open(latest, 'r') as infile:
-        return json.load(infile)
+    try:
+        latest = max(glob.iglob('thomasbot_memory*.json'), key=os.path.getctime)
+        with open(latest, 'r') as infile:
+            return json.load(infile)
+    except ValueError:
+        # There is no memory file on disk
+        return {}
 
 main()
 
