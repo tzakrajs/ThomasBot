@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.5
 # ThomasBot
 # Author: Thomas Zakrajsek
 # Copyright 2017

@@ -9,7 +9,11 @@ memory = {}
 
 def main():
     global memory
-    memory = load_memory_from_disk()
+    try:
+        memory = load_memory_from_disk()
+    except ValueError:
+        # There is no memory file on disk
+        pass
 
 def get_memory():
     return memory
